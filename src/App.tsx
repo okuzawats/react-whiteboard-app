@@ -7,6 +7,7 @@ function App() {
   const [editMode, setEditMode] = React.useState(false);
 
   return (
+    /* onDropイベントを発火させるためにonDragOver内でpreventDefaultを呼び出す必要がある。 */
     <div
       style={{ width: "1000px", height: "1000px", position: "relative" }}
       onDrop={ (e) => setPos({ x: e.clientX, y: e.clientY }) }
