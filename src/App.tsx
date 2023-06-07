@@ -14,15 +14,23 @@ function App() {
       onDragOver={ (e) => e.preventDefault() }
     >
       <div style={{ position: "absolute", top: pos.y + "px", left: pos.x + "px" }} draggable={true}>
-        { editMode ? (
-          <textarea
-            onBlur={(e) => setEditMode(false)}
-            onChange={(e) => setText(e.target.value)}
-            defaultValue={text}
-          />
-        ) : (
-          <div onClick={(e) => setEditMode(true)}>{text}</div>
-        )}
+        {
+          /*
+           * editMode = trueの時は編集可能なtextareaを表示する。
+           * onBlurイベント（フォーカスを失った時に発火する）で編集完了し、textを確定する。
+           */
+          editMode ? (
+            <textarea
+              onBlur={(e) => setEditMode(false)}
+              onChange={(e) => setText(e.target.value)}
+              defaultValue={text}
+            />
+          ) : (
+            <div onClick={(e) => setEditMode(true)}>
+              {text}
+            </div>
+          )
+        }
       </div>
     </div>
   );
