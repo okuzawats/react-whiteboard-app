@@ -11,11 +11,6 @@ interface CardsState {
   [key: string]: Card;
 }
 
-interface Position {
-  x: number;
-  y: number;
-}
-
 interface EditModeState {
   key: string;
 }
