@@ -1,15 +1,34 @@
 import React from 'react';
 import './App.css';
 
+interface Card {
+  t: string;
+  x: number;
+  y: number;
+}
+
+interface CardsState {
+  [key: string]: Card;
+}
+
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface EditModeState {
+  key: string;
+}
+
 function App() {
-  const [cards, setCards] = React.useState({
+  const [cards, setCards] = React.useState<CardsState>({
     id1: { t: "Text1", x: 100, y: 100 },
     id2: { t: "Text2", x: 200, y: 300 },
   });
-  const update = (key: string, card: object) => setCards({ ...cards, [key]: card });
+  const update = (key: string, card: Card) => setCards({ ...cards, [key]: card });
 
-  const [pos, setPos] = React.useState({ x: 0, y: 0 });
-  const [editMode, setEditMode] = React.useState({ key: "" });
+  const [pos, setPos] = React.useState<Position>({ x: 0, y: 0 });
+  const [editMode, setEditMode] = React.useState<EditModeState>({ key: "" });
 
   return (
     /* onDropイベントを発火させるためにonDragOver内でpreventDefaultを呼び出す必要がある。 */
