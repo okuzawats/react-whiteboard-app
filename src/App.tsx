@@ -26,15 +26,17 @@ function App() {
     id2: { t: "Text2", x: 200, y: 300 },
   });
   const update = (key: string, card: Card) => setCards({ ...cards, [key]: card });
-
-  const [pos, setPos] = React.useState<Position>({ x: 0, y: 0 });
+  const [dragging, setDragging] = React.useState({ key: "", x: 0, y: 0 });
   const [editMode, setEditMode] = React.useState<EditModeState>({ key: "" });
 
   return (
     /* onDropイベントを発火させるためにonDragOver内でpreventDefaultを呼び出す必要がある。 */
     <div
       style={{ width: "1000px", height: "1000px", position: "relative" }}
-      onDrop={ (e) => setPos({ x: e.clientX, y: e.clientY }) }
+      onDrop={ (e) => {
+        if (!dragging || !cards) return;
+        update(dragging.key, { ...cards[dragging.key], x: e.clientX - dragging.x, y: e.clientY - dragging.y });
+      }}
       onDragOver={ (e) => e.preventDefault() }
     >
       { Object.keys(cards).map((key) => (
@@ -42,6 +44,7 @@ function App() {
           key={key}
           style={{ position: "absolute", top: cards[key].y + "px", left: cards[key].x + "px" }}
           draggable={true}
+          onDragStart={(e) => setDragging({ key, x: e.clientX - cards[key].x, y: e.clientY - cards[key].y })}
         >
           { 
             /*
