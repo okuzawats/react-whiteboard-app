@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+このアプリは、以下のサンプルコードを実装したものです。
+
+[【100行で出来る】在宅でもブレストがしたいので、オンラインホワイトボード（付箋アプリ）を作ろう stayhome-board - Qiita](https://qiita.com/numanomanu/items/e0ace008565164c17b75)
+
 ## Available Scripts
 
 In the project directory, you can run:
